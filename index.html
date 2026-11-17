@@ -3,12 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мой сайт</title>
+  <title>Проверка HTML и CSS перед деплоем</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Привет, GitHub Actions!</h1>
-  <p class="status">Обновлено через CI/CD, Vercel тоже обновился</p>
-  <p>Это пример контента статической страницы, опубликованной через GitHub Pages.</p>
+  <h1>Привет, GitHub Actions! ✓</h1>
+  <p class="status">Индивидуальный проект: линтинг HTML и CSS перед деплоем</p>
+
+  <h2>Как работает пайплайн</h2>
+  <ol>
+    <li>Push в ветку main запускает workflow.</li>
+    <li>Задание lint проверяет все HTML- и CSS-файлы репозитория.</li>
+    <li>Если ошибок нет, задание deploy публикует сайт на GitHub Pages.</li>
+    <li>Если ошибка найдена, публикация пропускается и сайт остаётся прежним.</li>
+  </ol>
+
+  <p>Состояние последней сборки показывает бейдж в README репозитория.</p>
 </body>
 </html>
