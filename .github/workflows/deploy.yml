@@ -3,14 +3,37 @@ name: Deploy static site
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Lint HTML
+        run: npx --yes htmlhint@1 "**/*.html"
+
+      - name: Lint CSS
+        run: npx --yes stylelint@16 "**/*.css"
+
   deploy:
+    needs: lint
     runs-on: ubuntu-latest
     environment:
       name: github-pages
